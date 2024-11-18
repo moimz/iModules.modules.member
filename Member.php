@@ -7,7 +7,7 @@
  * @file /modules/member/Member.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 11. 15.
+ * @modified 2024. 11. 18.
  */
 namespace modules\member;
 class Member extends \Module
@@ -333,10 +333,10 @@ class Member extends \Module
     {
         $member_id ??= $this->getLogged();
         if ($member_id === 0) {
-            return $this->getDir() . '/images/photo.jpg';
+            return $this->getDir() . '/images/photo.webp';
         }
 
-        return \iModules::getUrl($is_full_url) . '/members/' . $member_id . '/photo.jpg';
+        return \iModules::getUrl($is_full_url) . '/members/' . $member_id . '/photo.webp';
     }
 
     /**
