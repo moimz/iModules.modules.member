@@ -7,7 +7,7 @@
  * @file /modules/member/Member.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 11. 15.
+ * @modified 2024. 11. 20.
  */
 namespace modules\member;
 class Member extends \Module
@@ -609,6 +609,9 @@ class Member extends \Module
                 ->execute();
             $this->storeLog($this, 'login', 'success');
         }
+
+        //@todo $oauth : 예외처리, 위치 조정
+        $oauth = \Events::fireEvent($this, 'beforeAdminLayout', [$member_id], 'NOTNULL');
 
         return true;
     }

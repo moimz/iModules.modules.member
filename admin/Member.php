@@ -7,7 +7,7 @@
  * @file /modules/member/admin/Member.php
  * @author Arzz <arzz@arzz.com>
  * @license MIT License
- * @modified 2024. 1. 26.
+ * @modified 2024. 11. 20.
  */
 namespace modules\member\admin;
 class Member extends \modules\admin\admin\Component
@@ -220,6 +220,20 @@ class Member extends \modules\admin\admin\Component
         $salesforce->user_nickname_path = 'displayName';
         $salesforce->user_photo_path = 'photo.fullEmailPhotoUrl';
         $presets[] = $salesforce;
+
+        $slack = new \stdClass();
+        $slack->oauth_id = 'slack';
+        $slack->auth_url = 'https://slack.com/oauth/v2/authorize';
+        $slack->token_url = 'https://slack.com/api/oauth.v2.access';
+        $slack->scope = ['users.profile:read'];
+        $slack->scope_separator = ',';
+        $slack->user_url = 'https://slack.com/api/users.profile.get';
+        $slack->user_id_path = 'user_id';
+        $slack->user_email_path = 'email';
+        $slack->user_name_path = 'real_name';
+        $slack->user_nickname_path = 'display_name.name';
+        $slack->user_photo_path = 'image_512';
+        $presets[] = $slack;
 
         return $presets;
     }
