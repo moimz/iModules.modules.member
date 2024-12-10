@@ -7,7 +7,7 @@
  * @file /modules/member/processes/member.post.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 11. 8.
+ * @modified 2024. 12. 10.
  *
  * @var \modules\member\Member $me
  */
@@ -148,6 +148,17 @@ if (count($errors) == 0) {
             $group->getGroup()->removeMember($member_id);
         }
     }
+
+    /**
+     * @var \modules\naddle\coursemos\Coursemos $mCoursemos
+     */
+    $mCoursemos = \Modules::get('naddle/coursemos');
+
+    $oauth = $mCoursemos->getOauthManager($member_id);
+    //모모->슬랙 기본프로필 싱크
+    $oauth->setProfile();
+    //모모->슬랙 프로필사진 싱크
+    $oauth->setPhoto();
 
     $results->success = true;
     $results->member_id = $member_id;
